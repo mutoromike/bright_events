@@ -1,4 +1,4 @@
-# Brigh Events
+# Bright Events
 Bright events provides a platform for event organizers to create and manage different types of events while making them easily accessible to target markets.
 
 Event organizers need to register for accounts, so they can create and manage their events.
