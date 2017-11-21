@@ -96,7 +96,7 @@ class AccountTestCases(unittest.TestCase):
         self.user.user_list = [
             {'username': 'mike', 'password': 'asdQWER4', 'email': 'mike@gmail.com'}]
         msg = self.user.login("mike", "asdQWER4")
-        self.assertIn("create shoppinglist!", msg)
+        self.assertIn("create event!", msg)
 
 
 if __name__ == '__main__':

@@ -42,6 +42,6 @@ class UserClass(object):
         for user in self.user_list:
             if username == user['username']:
                 if password == user['password']:
-                    return "Successfully logged in, create shoppinglist!"
+                    return "Successfully logged in, create event!"
                 return "Password mismatch"
         return "You have no account,please sign up"
