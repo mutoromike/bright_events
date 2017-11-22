@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import render_template, request, session
-from app import app, user_object
+from app import app, user_object, events_obj
 
 # Variable stores user's email
 user = None
@@ -55,12 +55,60 @@ def login():
             session['username'] = username
             global user
             user = username
-            user_lists = event_obj.get_owner(user)
-            return render_template('events.html', resp=msg, event=user_lists)
+            user_events = events_obj.getOwner(user)
+            return render_template('events.html', resp=msg, event=user_events)
         return render_template('login.html', error=msg)
     return render_template("login.html")
 
 
+@app.route('/events', methods=['GET', 'POST'])
+@authorize
+def Events():
+    # Handles events creation
+    
+    if user == session['username']:
+        user_events = events_obj.getOwner(user)
+    if request.method == 'POST':
+        event_name = request.form['event-name']
+        category = request.form['category']
+        location = request.form['location']
+        date = request.form['date']
+        msg = events_obj.createEvent(event_name, user, category, location, date)
+        if isinstance(msg, list):
+            return render_template('events.html', Events=msg)
+        return render_template('events.html', error=msg, Events=user_events)
+    return render_template('events.html', Events=user_events)
+
+
+@app.route('/edit-event', methods=['GET', 'POST'])
+@authorize
+def save_edits():
+    # Editing names of events 
+    if user == session['username']:
+        user_events = events_obj.getOwner(user=user)
+    if request.method == 'POST':
+        edit_name = request.form['event_name']
+        new_name = request.form['new_name']
+        msg = events_obj.editEvent(edit_name, new_name, user)
+        if msg == events_obj.events_list:
+            response = "Successfully edited event " + new_name
+            return render_template('events.html', resp=response, Events=msg)        
+        return render_template('events.html', error=msg, Events=user_lists)
+    return render_template('events.html')
+
+
+@app.route('/delete-event', methods=['GET', 'POST'])
+@authorize
+def delete_event():
+    # Deletion of events and their details
+    
+    if request.method == 'POST':
+        del_name = request.form['event_name']
+        msg = events_obj.deleteEvent(del_name, user=user)
+        # Delete the attendees
+        # events_obj.deleted_list_items(del_name)
+        response = "Successfuly deleted event " + del_name
+        return render_template('events.html', resp=response, Events=msg)
 
 
 
