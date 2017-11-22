@@ -29,34 +29,20 @@
 		<div class="col-md-10">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title">Items</h3>
+					<h3 class="panel-title">Event</h3>
 				</div>
 				<!--panel-heading-->
 				<table class="table table-hover" id="activity-table">
 					<thead>
 						<tr>
-							<th>Item Name</th>
-							<th>Save Edit</th>
-							<th>Trash</th>
+							
 						</tr>
 					</thead>
 					<tbody>
 						{% for eventdetail in eventlist %}
 						<tr>
-							<form id="edit-name-form-{{ shoppingitem }}">
-								<td>
-									<div class="form-group">
-										<input type="text" value="{{ shoppingitem }}" class="form-control" name="item_name" style="border:none">
-										<input type="hidden" value="{{ shoppingitem }}" class="form-control" name="item_name_org">
-										<input type="hidden" value="{{ name }}" class="form-control" name="list_name">
-									</div>
-								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="edit-name-form-{{ shoppingitem }}" formmethod="post" formaction="/edit-item">
-							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
-								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="edit-name-form-{{ shoppingitem }}" formmethod="post" formaction="/delete-item">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Trash</button>
-								</td>
+							<form id="edit-name-form-{{ eventdetail }}">
+								
 							</form>
 						</tr>
 						{% endfor %}
