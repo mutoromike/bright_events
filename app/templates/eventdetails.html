@@ -19,15 +19,19 @@
 	</div>
 	<div class="row container">
 		<div class="col-md-10">
-			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title">{{ name }}</h3>
-				</div>
+						<h3 class="panel-title">
+								{% for item in Events %}
+								{{ item['name'] }}
+								{%endfor%}
+							</h3>
+					</div>
+			<div class="panel panel-success">
 				<!--panel-heading-->
 				<table class="table table-hover" id="activity-table">
 					<thead>
 						<tr>
-							<th>Event Detail</th>
+							<th>Category</th>
 							<th>Save Edit</th>
 						</tr>
 					</thead>
@@ -39,6 +43,40 @@
 									<div class="form-group">
 										<input type="text" value="{{ item['category'] }}" class="form-control" name="event_name" style="border:none">
 										<input type="hidden" value="{{ item['category'] }}" class="form-control" name="new_name">
+									</div>
+								</td>
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
+							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
+								</td>
+							</form>
+						</tr>
+						<tr>
+							<th>Location</th>
+							<th></th>
+						</tr>
+						<tr>
+							<form id="list-name-form-{{ item['name'] }}">
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['location'] }}" class="form-control" name="event_name" style="border:none">
+										<input type="hidden" value="{{ item['location'] }}" class="form-control" name="new_name">
+									</div>
+								</td>
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
+							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
+								</td>
+							</form>
+						</tr>
+						<tr>
+							<th>Date</th>
+							<th></th>
+						</tr>
+						<tr>
+							<form id="list-name-form-{{ item['name'] }}">
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['date'] }}" class="form-control" name="event_name" style="border:none">
+										<input type="hidden" value="{{ item['date'] }}" class="form-control" name="new_name">
 									</div>
 								</td>
 								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
