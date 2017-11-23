@@ -111,6 +111,19 @@ def delete_event():
         return render_template('events.html', resp=response, Events=msg)
 
 
+@app.route('/eventdetails/<eventer>', methods=['GET', 'POST'])
+@authorize
+def eventdetails(eventer):
+    my_event = events_obj.getOwner(user)    
+    msg = my_event 
+    for item in my_event:                
+        if eventer == item['name']: 
+            msg = my_event
+        return render_template('eventdetails.html', Events=msg)
+    return render_template('eventdetails.html', error=msg, Events=user_events)
+
+
+
 
 @app.route('/logout')
 def logout():
