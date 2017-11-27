@@ -1,9 +1,9 @@
-{% extends "base.html" %} {% block title %}userevents{%endblock%} {% block body %}
+{% extends "base.html" %} {% block title %}events{%endblock%} {% block body %}
 <div class="container page-content">
 	<div class="row container">
 		{%if resp in resp%}
 
-		<div class="alert alert-success " role="alert" id="reg-alert">
+		<div class="alert alert-success" role="alert" id="reg-alert">
 			{{ resp }}
 		</div>
 
@@ -14,49 +14,46 @@
             {{ error }}
         </div>
 
-        {%endif%}  
-		{% if name in name%}
-		<div>
-			<h4 style="margin:0px 0px 30px 10px"><strong>{{ name }}</strong></h4>
-		</div>
-		{%endif%}
-		<div>
-			
-			<!--form-->
-		</div>
+        {%endif%} 
 	</div>
 	<div class="row container">
 		<div class="col-md-10">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title">Items</h3>
+					<h3 class="panel-title">Available Events</h3>
 				</div>
 				<!--panel-heading-->
 				<table class="table table-hover" id="activity-table">
 					<thead>
 						<tr>
-							<th>Item Name</th>
-							<th>Save Edit</th>
-							<th>Trash</th>
+							<th>Event</th>
+							<th>Category</th>
+							<th>Location</th>
+                            <th>Details</th>
 						</tr>
 					</thead>
 					<tbody>
-						{% for eventdetail in eventlist %}
+						{% for item in Events %}
 						<tr>
-							<form id="edit-name-form-{{ shoppingitem }}">
+							<form id="list-name-form-{{ item['name'] }}">
 								<td>
 									<div class="form-group">
-										<input type="text" value="{{ shoppingitem }}" class="form-control" name="item_name" style="border:none">
-										<input type="hidden" value="{{ shoppingitem }}" class="form-control" name="item_name_org">
-										<input type="hidden" value="{{ name }}" class="form-control" name="list_name">
+										<input type="text" value="{{ item['name'] }}" class="form-control" style="border:none" disabled>
 									</div>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="edit-name-form-{{ shoppingitem }}" formmethod="post" formaction="/edit-item">
-							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['category'] }}" class="form-control" style="border:none" disabled>
+									</div>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="edit-name-form-{{ shoppingitem }}" formmethod="post" formaction="/delete-item">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Trash</button>
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['location'] }}" class="form-control" style="border:none" disabled>
+									</div>
 								</td>
+                                <td>
+                                    <a href="/rsvp/{{ item['name'] }}" class="btn btn-primary">Details</a>
+                                </td>
 							</form>
 						</tr>
 						{% endfor %}

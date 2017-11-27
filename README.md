@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/mutoromike/bright_events.svg?branch=develop)](https://travis-ci.org/mutoromike/bright_events)
 
+[![Coverage Status](https://coveralls.io/repos/github/mutoromike/bright_events/badge.svg?branch=master)](https://coveralls.io/github/mutoromike/bright_events?branch=master)
+
 # Bright Events
 
 Bright events provides a platform for event organizers to create and manage different types of events while making them easily accessible to target markets.

@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import render_template, request, session
-from app import app, user_object, events_obj
+from app import app, user_object, events_obj, eventdetails_obj
 
 # Variable stores user's email
 user = None
@@ -122,6 +122,34 @@ def eventdetails(eventer):
         return render_template('eventdetails.html', Events=msg)
     return render_template('eventdetails.html', error=msg, Events=user_events)
 
+@app.route('/userevents', methods=['GET', 'POST'])
+def userevents():
+    # Displays list of events to users
+        
+    msg = events_obj.allEvents()
+    if isinstance(msg, list):
+        return render_template('userevents.html', Events=msg)
+    return render_template('userevents.html', error=msg, Events=user_events)
+
+
+@app.route('/rsvp/<eventitem>', methods=['GET', 'POST'])
+@authorize
+def rsvp(eventitem):   
+    # Adding guests to events (RSVP)
+    user_event = eventdetails_obj.ownerEvents(user, eventitem)
+    # specific shopping list
+    new_guest = [item['name']
+                for item in user_event if item['event'] == eventitem]
+    if request.method == 'POST':
+        guest_name = request.form['name']
+        msg = eventdetails_obj.addGuest(eventitem, guest_name, user)
+        if isinstance(msg, list):
+            new_list = [item['name']
+                        for item in msg if item['event'] == eventitem]
+            return render_template("rsvp.html", itemlist=new_list, name=eventitem)
+        # msg is not a list
+        return render_template("rsvp.html", error=msg, name=eventitem, itemlist=new_list)
+    return render_template('rsvp.html')
 
 
 

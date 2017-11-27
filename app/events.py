@@ -11,23 +11,21 @@ class EventsClass(object):
         self.events_list = []
 
     def getOwner(self, user):
-        """Returns events belonging to a user
-        Args
-            user
-        returns
-            list of user's event(s)
-        """
+        # Returns events belonging to a user
+        
         user_events_list = [
             item for item in self.events_list if item['owner'] == user]
         return user_events_list
 
+    def allEvents(self):
+        # returns all existing events
+        all_events = [
+            item for item in self.events_list
+        ]
+        return all_events
+
     def createEvent(self, event_name, user, category, location, date):
-        """Handles creation of events
-            Args
-                list name
-            result
-                events lists
-        """
+        # Handles creation of events           
         # Check for special characters
         if re.match("^[a-zA-Z0-9 _]*$", event_name):
             # Get users shopping lists

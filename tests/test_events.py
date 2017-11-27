@@ -28,6 +28,17 @@ class TestCasesEvents(unittest.TestCase):
         msg = self.events_class_obj.createEvent("Back.to-School", "soft*%ware", "nairo@&", "23/23/23", user)
         self.assertEqual(msg, "No special characters (. , ! space [] )")
 
+    def test_return_of_all_events(self):
+        # Check for all events in the system
+        self.events_class_obj.events_list = [{'owner': 'mike@gmail.com', 'name': 'TeccDay', 'category': 'Software', 
+                                                'location': 'Nairobi', 'date': '21/3/2017'},
+                                                 {'owner': 'boris@gmail.com','name': 'Eatery', 'category': 'Food', 
+                                                'location': 'Nairobi', 'date': '21/3/2017'}]
+        msg = self.events_class_obj.events_list
+
+        value = self.events_class_obj.allEvents() 
+        self.assertEqual(msg, value)                                 
+    
     def test_owner(self):
         # Check for events belonging to owner
         self.events_class_obj.events_list = [{'owner': 'mike@gmail.com', 'name': 'TeccDay', 'category': 'Software', 

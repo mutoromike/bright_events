@@ -3,6 +3,7 @@
 from flask import Flask
 from app.useraccounts import UserClass
 from app.events import EventsClass
+from app.eventdetails import EventDetails
 
 
 # Initialize the app
@@ -12,6 +13,7 @@ app.secret_key = 'dresscodesleepbehappy'
 
 user_object = UserClass()
 events_obj = EventsClass()
+eventdetails_obj = EventDetails()
 
 from app import views
 
