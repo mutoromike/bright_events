@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mutoromike/bright_events.svg?branch=master)](https://travis-ci.org/mutoromike/bright_events)
+[![Build Status](https://travis-ci.org/mutoromike/bright_events.svg?branch=develop)](https://travis-ci.org/mutoromike/bright_events)
 
 # Bright Events
 
