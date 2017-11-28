@@ -13,7 +13,7 @@ application has originated from the fact that people need to have access to even
 [![Build Status](https://travis-ci.org/mutoromike/bright_events.svg?branch=develop)](https://travis-ci.org/mutoromike/bright_events)
 [![Coverage Status](https://coveralls.io/repos/github/mutoromike/bright_events/badge.svg?branch=develop)](https://coveralls.io/github/mutoromike/bright_events?branch=develop)
 
-## Tech/framework used
+## Tech/Framework used
 
 The application has been built by:
 - HTML/CSS/JS
@@ -32,37 +32,37 @@ This application allows users to:
 # Installation
 
 - Ensure you have 
-> `python 3.4 installed`
-> `istalled virtual environment`
+- > `python 3.4 installed`
+- > `istalled virtual environment`
 - Clone the repo to your local machine
 - Navigate to bright_events folder
-- Create a virtual environment and run the command: pip install -r requirements.txt (install packages)
+- Create a virtual environment and run the command: `pip install -r requirements.txt` (install packages)
 
 ### Start the application
 
 - The run the following to start the app:
-> `export FLASK_APP=run.py`
-> `export FLASK_DEBUG=true`
-> `flask run`
-- Navigate to > `http://127.0.0.1:5000/` to view the application
+- > `export FLASK_APP=run.py`
+- > `export FLASK_DEBUG=true`
+- > `flask run`
+- Navigate to `http://127.0.0.1:5000/` to view the application
 
 ## Tests
 
 To run tests and ensure the application works:
 - Navigate to tests folder on cmd or terminal
-> `tests`
-- Run the command > `nosetests` with the file name
-> `nosetests test_useraccoutnts.py`
+- > `tests`
+- Run the command `nosetests` with the file name
+- > `nosetests test_useraccoutnts.py`
 - Repeat this with all the files that contain tests i.e.,
-> `test_events.py`
-> `tests_eventdetails.py`
+- > `test_events.py`
+- > `tests_eventdetails.py`
 
 ## Using the application
 
 - Register to create an account
 - Login using username and password created
 - After signing in you can proceed to create events or RSVP to other events
-- To preview the UI, proceed to > `https://mutoromike.github.io/`
+- To preview the UI, proceed to `https://mutoromike.github.io/`
 
 
 
