@@ -32,8 +32,8 @@ This application allows users to:
 # Installation
 
 - Ensure you have 
-- > `python 3.4 installed`
-- > `istalled virtual environment`
+-  `python 3.4 installed`
+-  `istalled virtual environment`
 - Clone the repo to your local machine
 - Navigate to bright_events folder
 - Create a virtual environment and run the command: `pip install -r requirements.txt` (install packages)
@@ -41,21 +41,21 @@ This application allows users to:
 ### Start the application
 
 - The run the following to start the app:
-- > `export FLASK_APP=run.py`
-- > `export FLASK_DEBUG=true`
-- > `flask run`
+-  `export FLASK_APP=run.py`
+-  `export FLASK_DEBUG=true`
+-  `flask run`
 - Navigate to `http://127.0.0.1:5000/` to view the application
 
 ## Tests
 
 To run tests and ensure the application works:
 - Navigate to tests folder on cmd or terminal
-- > `tests`
+-  `tests`
 - Run the command `nosetests` with the file name
-- > `nosetests test_useraccoutnts.py`
+-  `nosetests test_useraccoutnts.py`
 - Repeat this with all the files that contain tests i.e.,
-- > `test_events.py`
-- > `tests_eventdetails.py`
+-  `test_events.py`
+-  `tests_eventdetails.py`
 
 ## Using the application
 
