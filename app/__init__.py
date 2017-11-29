@@ -1,6 +1,7 @@
 #app/__init__.py 
 
 from flask import Flask
+from flask_login import LoginManager
 from app.useraccounts import UserClass
 from app.events import EventsClass
 from app.eventdetails import EventDetails
@@ -9,7 +10,8 @@ from app.eventdetails import EventDetails
 # Initialize the app
 app = Flask(
     __name__, instance_relative_config=True)
-app.secret_key = 'dresscodesleepbehappy'
+app.secret_key = 'tonystarktheironman'
+login_manager = LoginManager()
 
 user_object = UserClass()
 events_obj = EventsClass()

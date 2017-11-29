@@ -1,5 +1,6 @@
 from functools import wraps
 from flask import render_template, request, session
+from flask_login import login_manager
 from app import app, user_object, events_obj, eventdetails_obj
 
 # Variable stores user's email
