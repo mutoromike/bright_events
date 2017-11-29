@@ -1,6 +1,5 @@
 import unittest
-from flask_login import current_user
-from flask_login import login_manager
+from flask_login import current_user, login_manager
 from flask_testing import TestCase
 from app import app, user_object, events_obj, eventdetails_obj
 from app import views
