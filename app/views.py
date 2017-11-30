@@ -140,8 +140,8 @@ def rsvp(eventid):
     event_name = eventid
     msg1 = eventdetails_obj.addGuest(event_name, user)
     if msg1 == "Successful RSVP":   
-        return render_template("rsvp.html", error=msg1)
-    return render_template("rsvp.html", resp=msg1)
+        return render_template("rsvp.html", resp=msg1)
+    return render_template("rsvp.html", error=msg1)
 
 @app.route('/api/v1/auth/reset-password', methods=['GET', 'POST'])
 @authorize
