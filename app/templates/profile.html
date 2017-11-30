@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}rsvp{%endblock%} {% block body %}
+<div class="container page-content">
+	<div class="row container">
+		{%if resp in resp%}
+
+		<div class="alert alert-success" role="alert" id="reg-alert">
+			{{ resp }}
+		</div>
+
+		{%endif%}
+		{%if error in error%}
+
+        <div class="alert alert-danger" role="alert" id="reg-alert">
+            {{ error }}
+        </div>
+
+        {%endif%} 
+        <div>
+			<form id="add-item-form" method="post" action="/api/v1/auth/reset-password" style="display: block;margin:0px 0px 30px 30px;">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="password" name="npassword" id="npassword" placeholder="Enter new password" value="" class="form-control" required>
+						</div>
+                    </div>
+                    <div class="col-sm-4">
+						<div class="form-group">
+							<input type="password" name="cpassword" id="cpassword" placeholder="Confirm new password" value="" class="form-control" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="submit" method="post" name="item-submit" id="item-submit" class=" btn btn-primary" value="Reset Password">
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--form-->
+		</div>
+		
+	</div>
+	
+</div>
+{% endblock %}

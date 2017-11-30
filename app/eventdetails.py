@@ -26,21 +26,25 @@ class EventDetails(object):
         ]
         return all_events
 
-    def addGuest(self, event_name, guest_name, user):
-        # Handles adding new guest to an event 
-        if re.match("^[a-zA-Z0-9 _]*$", guest_name):
-            # Get users items       
-            my_events = self.ownerEvents(user, event_name)
-            for item in my_events:
-                if item['name'] == guest_name:
-                    return "You have already RSVP to this event!"
-            activity_dict = {
-                'name': guest_name,
-                'event': event_name,
-                'owner': user
-            }
+    def addGuest(self, event_name, user):
+        # Handles adding new guest to an event
+        activity_dict = {}
+
+        temp_guets = [guest for guest in self.rsvp_list if guest["guest"] == user]
+        if not temp_guets:
+            activity_dict['event'] = event_name
+            activity_dict['guest'] = user
             self.rsvp_list.append(activity_dict)
-            return self.ownerEvents(user, event_name)
-        return "No special characters (. , ! space [] )"
+            print(activity_dict)
+            return "Successful RSVP"
+        
+        return "You have already RSVP to this event"
+
+    def viewGuests(self, event_name):
+        # Return guests who RSVP to an event
+        guests = [item['guest'] for item in self.rsvp_list if item['event'] == events_list]
+        return guests
+ 
+                        
 
     
