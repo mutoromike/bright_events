@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block title %}events{%endblock%} {% block body %}
+<div class="container page-content">
+	<div class="row container">
+		{%if resp in resp%}
+
+		<div class="alert alert-success" role="alert" id="reg-alert">
+			{{ resp }}
+		</div>
+
+		{%endif%}
+		{%if error in error%}
+
+        <div class="alert alert-danger" role="alert" id="reg-alert">
+            {{ error }}
+        </div>
+
+        {%endif%} 
+		<div>
+
+			<form id="add-list-form" method="post" action="/api/v1/events" style="display: block;margin:0px 0px 30px 30px;">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="text" name="event-name" id="event-name" placeholder="Event Name" value="" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="text" name="category" id="category" placeholder="Category" value="" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="text" name="location" id="location" placeholder="Location" value="" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="date" name="date" id="date" placeholder="dd/mm/yyyy" value="" class="form-control" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="submit" method="post" name="list-submit" id="list-submit" class=" btn btn-primary" value="Add Event">
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--form-->
+		</div>
+	</div>
+	<div class="row container">
+		<div class="col-md-10">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">My Events</h3>
+				</div>
+				<!--panel-heading-->
+				<table class="table table-hover" id="activity-table">
+					<thead>
+						<tr>
+							<th>Event Name</th>
+							<th>Save Edit</th>
+							<th>Delete Event</th>
+                            <th>View Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in Events %}
+						<tr>
+							<form id="list-name-form-{{ item['name'] }}">
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['name'] }}" class="form-control" name="event_name" style="border:none">
+										<input type="hidden" value="{{ item['name'] }}" class="form-control" name="new_name">
+									</div>
+								</td>
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/edit-event">
+							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
+								</td>
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/delete-event">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>   </button>
+								</td>
+                                <td>
+                                    <a href="/api/v1/eventdetails/{{ item['name'] }}" class="btn btn-primary">Details</a>
+                                </td>
+							</form>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<!--panel panel-success-->
+		</div>
+		<!--col-md-8-->
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block title %}events{%endblock%} {% block body %}
+<div class="container page-content">
+	<div class="row container">
+		{%if resp in resp%}
+
+		<div class="alert alert-success" role="alert" id="reg-alert">
+			{{ resp }}
+		</div>
+
+		{%endif%}
+		{%if error in error%}
+
+        <div class="alert alert-danger" role="alert" id="reg-alert">
+            {{ error }}
+        </div>
+
+        {%endif%} 
+	</div>
+	<div class="row container">
+		<div class="col-md-10">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">Available Events</h3>
+				</div>
+				<!--panel-heading-->
+				<table class="table table-hover" id="activity-table">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Category</th>
+							<th>Location</th>
+                            <th>Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in Events %}
+						<tr>
+							<form id="list-name-form-{{ item['name'] }}">
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['name'] }}" class="form-control" style="border:none" disabled>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['category'] }}" class="form-control" style="border:none" disabled>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item['location'] }}" class="form-control" style="border:none" disabled>
+									</div>
+								</td>
+                                <td>
+                                    <a href="/api/v1/{{ item['name'] }}/rsvp" class="btn btn-primary">RSVP</a>
+                                </td>
+							</form>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<!--panel panel-success-->
+		</div>
+		<!--col-md-8-->
+	</div>
+</div>
+{% endblock %}

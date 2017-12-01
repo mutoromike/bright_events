@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}rsvp{%endblock%} {% block body %}
+<div class="container page-content">
+	<div class="row container">
+		{%if resp in resp%}
+
+		<div class="alert alert-success" role="alert" id="reg-alert">
+			{{ resp }}
+		</div>
+
+		{%endif%}
+		{%if error in error%}
+
+        <div class="alert alert-danger" role="alert" id="reg-alert">
+            {{ error }}
+        </div>
+
+        {%endif%} 
+        
+		
+	</div>
+</div>
+{% endblock %}
