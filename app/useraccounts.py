@@ -55,4 +55,12 @@ class UserClass(object):
             return "The new passwords should match"
         return "User does not exist, sign up!"
 
+    def get_user_by_email(self, user):
+        for item in self.user_list:
+            if item['username'] == user:
+                email = item['email']
+                return email
+        else:
+            return False
+
 

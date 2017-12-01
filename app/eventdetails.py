@@ -26,14 +26,16 @@ class EventDetails(object):
         ]
         return all_events
 
-    def addGuest(self, event_name, user):
+    def addGuest(self, event_name, user, email):
         # Handles adding new guest to an event
+
         activity_dict = {}
 
         temp_guets = [guest for guest in self.rsvp_list if guest["guest"] == user]
         if not temp_guets:
             activity_dict['event'] = event_name
             activity_dict['guest'] = user
+            activity_dict['mail'] = email
             self.rsvp_list.append(activity_dict)
             print(activity_dict)
             return "Successful RSVP"
@@ -42,9 +44,15 @@ class EventDetails(object):
 
     def viewGuests(self, event_name):
         # Return guests who RSVP to an event
-        guests = [item['guest'] for item in self.rsvp_list if item['event'] == events_list]
+        guests = [item['mail'] for item in self.rsvp_list if item['event'] == event_name]
         return guests
- 
+
+    def newGuests(self, event_name):
+        visitors = self.viewGuests(event_name)        
+        for item in visitors:                
+            if event_name == item['event']: 
+                final = visitors
+                return final
                         
 
     

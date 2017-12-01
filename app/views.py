@@ -116,10 +116,14 @@ def delete_event():
 def eventdetails(eventid):
     my_event = events_obj.getOwner(user)    
     msg = my_event 
+    event_name = eventid
+    new = eventdetails_obj.viewGuests(event_name) 
+    print(new)
+       
     for item in my_event:                
         if eventid == item['name']: 
             msg = my_event
-        return render_template('eventdetails.html', Events=msg)
+        return render_template('eventdetails.html', Events=msg, visitor=new)
     return render_template('eventdetails.html', error=msg, Events=user_events)
 
 @app.route('/api/v1/userevents', methods=['GET', 'POST'])
@@ -134,11 +138,13 @@ def userevents():
 
 @app.route('/api/v1/<eventid>/rsvp', methods=['GET', 'POST'])
 @authorize
-def rsvp(eventid):   
+def rsvp(eventid):      
     # Adding guests to events (RSVP)
     user = session['username']
     event_name = eventid
-    msg1 = eventdetails_obj.addGuest(event_name, user)
+    email = user_object.get_user_by_email(user)
+
+    msg1 = eventdetails_obj.addGuest(event_name, user, email)
     if msg1 == "Successful RSVP":   
         return render_template("rsvp.html", resp=msg1)
     return render_template("rsvp.html", error=msg1)
