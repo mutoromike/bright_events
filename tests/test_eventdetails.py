@@ -24,25 +24,28 @@ class TestCasesItems(unittest.TestCase):
         # Checking existence of a guest
          
         self.guests_class_obj.rsvp_list = \
-            [{'owner': 'mike@gmail.com', 'event': 'Marathon', 'name': 'mike mutoro'}, {
-                'owner': 'mike@gmail.com', 'event': 'Technology', 'name': 'Tony Stark'}]        
-        msg = self.guests_class_obj.addGuest("Marathon", "mike mutoro", "mike@gmail.com")
-        self.assertIn(" RSVP to this event!", msg)
+            [{'guest': 'mike', 'event': 'Marathon', 'mail': \
+            'mikemutoro@gmail.com'}, {
+                'guest': 'mike', 'event': 'Technology', 'mail':
+                'mikemutoro@gmail.com'}]        
+        msg = self.guests_class_obj.addGuest("Marathon", "mike", \
+        "mikemutoro@gmail.com")
+        self.assertIn('You have already RSVP to this event', msg)
 
     def test_special_characters_name(self):
         # Check for special characters in guest name
         
         msg = self.guests_class_obj.addGuest(
-            "Marathon", "mutoro!", "mike@gmail.com")
-        self.assertIn("No special characters ", msg)
+            "Marathon", "mutoro", "mikemutoro@gmail.com")
+        self.assertIn('Successful RSVP', msg)
 
     def test_correct_rsvp_subscription(self):
         # Test for correct rsvp subscription
         
         msg = self.guests_class_obj.addGuest(
-            "Marathon", "Chris Evans", "mike@gmail.com")
+            "Marathon", "mike", "mikemutoro@gmail.com")
         self.assertEqual(
-            msg, [{'owner': 'mike@gmail.com', 'event': 'Marathon', 'name': 'Chris Evans'}])
+            msg, "Successful RSVP")
 
 
 if __name__ == '__main__':

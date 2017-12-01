@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import render_template, request, session
+from flask import render_template, request, session, jsonify
 from app import app, user_object, events_obj, eventdetails_obj
 
 # Variable stores user's email
@@ -25,7 +25,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/api/v1/auth/register', methods=['GET', 'POST'])
 def register():
     # User registeration
     
@@ -43,7 +43,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/v1/auth/login', methods=['GET', 'POST'])
 def login():
     # Handling logging in
 
@@ -61,7 +61,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/events', methods=['GET', 'POST'])
+@app.route('/api/v1/events', methods=['GET', 'POST'])
 @authorize
 def Events():
     # Handles events creation
@@ -80,7 +80,7 @@ def Events():
     return render_template('events.html', Events=user_events)
 
 
-@app.route('/edit-event', methods=['GET', 'POST'])
+@app.route('/api/v1/edit-event', methods=['GET', 'POST'])
 @authorize
 def save_edits():
     # Editing names of events 
@@ -97,7 +97,7 @@ def save_edits():
     return render_template('events.html')
 
 
-@app.route('/delete-event', methods=['GET', 'POST'])
+@app.route('/api/v1/delete-event', methods=['GET', 'POST'])
 @authorize
 def delete_event():
     # Deletion of events and their details
@@ -111,18 +111,22 @@ def delete_event():
         return render_template('events.html', resp=response, Events=msg)
 
 
-@app.route('/eventdetails/<eventer>', methods=['GET', 'POST'])
+@app.route('/api/v1/eventdetails/<eventid>', methods=['GET', 'POST'])
 @authorize
-def eventdetails(eventer):
+def eventdetails(eventid):
     my_event = events_obj.getOwner(user)    
     msg = my_event 
+    event_name = eventid
+    new = eventdetails_obj.viewGuests(event_name) 
+    print(new)
+       
     for item in my_event:                
-        if eventer == item['name']: 
+        if eventid == item['name']: 
             msg = my_event
-        return render_template('eventdetails.html', Events=msg)
+        return render_template('eventdetails.html', Events=msg, visitor=new)
     return render_template('eventdetails.html', error=msg, Events=user_events)
 
-@app.route('/userevents', methods=['GET', 'POST'])
+@app.route('/api/v1/userevents', methods=['GET', 'POST'])
 def userevents():
     # Displays list of events to users
         
@@ -132,28 +136,35 @@ def userevents():
     return render_template('userevents.html', error=msg, Events=user_events)
 
 
-@app.route('/rsvp/<eventitem>', methods=['GET', 'POST'])
+@app.route('/api/v1/<eventid>/rsvp', methods=['GET', 'POST'])
 @authorize
-def rsvp(eventitem):   
+def rsvp(eventid):      
     # Adding guests to events (RSVP)
-    user_event = eventdetails_obj.ownerEvents(user, eventitem)
-    # specific shopping list
-    new_guest = [item['name']
-                for item in user_event if item['event'] == eventitem]
-    if request.method == 'POST':
-        guest_name = request.form['name']
-        msg = eventdetails_obj.addGuest(eventitem, guest_name, user)
-        if isinstance(msg, list):
-            new_list = [item['name']
-                        for item in msg if item['event'] == eventitem]
-            return render_template("rsvp.html", itemlist=new_list, name=eventitem)
-        # msg is not a list
-        return render_template("rsvp.html", error=msg, name=eventitem, itemlist=new_list)
-    return render_template('rsvp.html')
+    user = session['username']
+    event_name = eventid
+    email = user_object.get_user_by_email(user)
 
+    msg1 = eventdetails_obj.addGuest(event_name, user, email)
+    if msg1 == "Successful RSVP":   
+        return render_template("rsvp.html", resp=msg1)
+    return render_template("rsvp.html", error=msg1)
 
+@app.route('/api/v1/auth/reset-password', methods=['GET', 'POST'])
+@authorize
+def reset_password():
+    #Reseting password
+    if request.method == "POST":
+        npassword = request.form['npassword']
+        cpassword = request.form['cpassword']
+        if npassword == cpassword:
+            msg = user_object.changePassword(npassword,cpassword)
+            return render_template("profile.html", resp=msg)
+        else: 
+            msg = "The new passwords should match"
+            return render_template("profile.html", error=msg)
+    return render_template("profile.html")
 
-@app.route('/logout')
+@app.route('/api/v1/logout')
 def logout():
     # Logging out
     session.pop('username', None)

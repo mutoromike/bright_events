@@ -9,7 +9,7 @@ from app.eventdetails import EventDetails
 # Initialize the app
 app = Flask(
     __name__, instance_relative_config=True)
-app.secret_key = 'dresscodesleepbehappy'
+app.secret_key = 'tonystarktheironman'
 
 user_object = UserClass()
 events_obj = EventsClass()
