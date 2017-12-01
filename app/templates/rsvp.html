@@ -15,72 +15,8 @@
         </div>
 
         {%endif%} 
-        <div>
-			<form id="add-item-form" method="post" action="/rsvp/{{ name }}" style="display: block;margin:0px 0px 30px 30px;">
-				<div class="row">
-					<div class="col-sm-8">
-						<div class="form-group">
-							<input type="text" name="name" id="name" placeholder="Enter your name" value="" class="form-control" required>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<input type="submit" method="post" name="item-submit" id="item-submit" class=" btn btn-primary" value="RSVP">
-						</div>
-					</div>
-				</div>
-			</form>
-			<!--form-->
-		</div>
+        
 		
-	</div>
-	<div class="row container">
-		<div class="col-md-10">
-				<div class="panel-heading">
-						<h3 class="panel-title">
-								{% for item in itemlist %}
-								{{ item['name'] }}
-								{%endfor%}
-							</h3>
-					</div>
-			<div class="panel panel-success">
-				<!--panel-heading-->
-				<table class="table table-hover" id="activity-table">
-					<thead>
-						<tr>
-							<th>Category</th>
-                            <th>Location</th>
-                            <th>Date</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for item in itemlist %}
-						<tr>
-							<form id="list-name-form-{{ item['name'] }}">
-								<td>
-									<div class="form-group">
-										<input type="text" value="{{ item['category'] }}" class="form-control" style="border:none" disabled>
-									</div>
-                                </td>
-                                <td>
-									<div class="form-group">
-										<input type="text" value="{{ item['location'] }}" class="form-control" style="border:none" disabled>
-									</div>
-								</td>
-								<td>
-									<div class="form-group">
-										<input type="text" value="{{ item['date'] }}" class="form-control" style="border:none" disabled>
-									</div>
-								</td>
-							</form>					
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-			<!--panel panel-success-->
-		</div>
-		<!--col-md-8-->
 	</div>
 </div>
 {% endblock %}

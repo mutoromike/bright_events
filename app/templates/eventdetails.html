@@ -45,7 +45,7 @@
 										<input type="hidden" value="{{ item['category'] }}" class="form-control" name="new_name">
 									</div>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/edit-event">
 							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
 								</td>
 							</form>
@@ -62,7 +62,7 @@
 										<input type="hidden" value="{{ item['location'] }}" class="form-control" name="new_name">
 									</div>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/edit-event">
 							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
 								</td>
 							</form>
@@ -84,6 +84,21 @@
 								</td>
 							</form>
 						</tr>
+						{% endfor %}						
+						<tr>
+							<th>Attendees</th>
+							<th></th>
+						</tr>						
+						{% for item in visitor %}
+						<tr>
+							<form>
+								<td>
+									<div class="form-group">
+										<input type="text" value="{{ item }}" class="form-control"  style="border:none" disabled>
+									</div>
+								</td>
+							</form>
+						</tr>						
 						{% endfor %}
 					</tbody>
 				</table>

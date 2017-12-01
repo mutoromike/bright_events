@@ -17,7 +17,7 @@
         {%endif%} 
 		<div>
 
-			<form id="add-list-form" method="post" action="/events" style="display: block;margin:0px 0px 30px 30px;">
+			<form id="add-list-form" method="post" action="/api/v1/events" style="display: block;margin:0px 0px 30px 30px;">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="form-group">
@@ -30,7 +30,7 @@
 							<input type="text" name="location" id="location" placeholder="Location" value="" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="text" name="date" id="date" placeholder="dd/mm/yyyy" value="" class="form-control" required>
+							<input type="date" name="date" id="date" placeholder="dd/mm/yyyy" value="" class="form-control" required>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -69,14 +69,14 @@
 										<input type="hidden" value="{{ item['name'] }}" class="form-control" name="new_name">
 									</div>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/edit-event">
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/edit-event">
 							<span class="glyphicon glyphicon-saved" aria-hidden="true"></span>Save</button>
 								</td>
-								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/delete-event">
+								<td> <button type="submit" class="btn btn-info btn-sm" form="list-name-form-{{ item['name'] }}" formmethod="post" formaction="/api/v1/delete-event">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>   </button>
 								</td>
                                 <td>
-                                    <a href="/eventdetails/{{ item['name'] }}" class="btn btn-primary">Details</a>
+                                    <a href="/api/v1/eventdetails/{{ item['name'] }}" class="btn btn-primary">Details</a>
                                 </td>
 							</form>
 						</tr>
