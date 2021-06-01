@@ -23,7 +23,7 @@ pbr==3.1.1
 pylint==1.7.4
 requests==2.18.4
 stevedore==1.27.1
-urllib3==1.22
+urllib3==1.26.5
 validators==0.12.0
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
